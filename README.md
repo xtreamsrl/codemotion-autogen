@@ -7,25 +7,24 @@ GenAI).
 ## Setup
 
 To get started with the workshop, follow these steps:
-
-1. Install project dependencies:
-
+ 
+1. First of all, copy the API keys we provided you into the [.env](.env) file.
+2. Run the following command in the repository root to install dependencies and set up the environment:
     ```bash
-    npm install
+    npm run setup
     ```
-
-2. Copy `.env.example` to `.env.local`:
-
+3. Start docker services:
     ```bash
-    cp .env.example .env.local
+    docker compose up -d --build tutorial-ui autogenstudio-ui
     ```
+4. In the meanwhile, start the LinkedIn post generator app:
+   ```bash
+   npm run start
+   ```
 
-3. Fill the OpenAI API key in the `.env.local` file with the one we provided you.
-
-4. Run the app
-```bash
-npm start dev
-```
+## Links
+- [Tutorial UI](http://localhost:9090)
+- [AutoGen Studio](http://localhost:8081)
 
 ## Codebase Overview
 

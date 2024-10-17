@@ -1,6 +1,4 @@
 /workflows/
 !/workflows/.gitkeep
 /app_data/
-!/app_data/.env.example
-/.venv/
-*.pyc
+!/app_data/database.sqlite

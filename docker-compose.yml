@@ -3,22 +3,26 @@ version: '3'
 services:
   autogenstudio-ui:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: autogen
     command: ui --host 0.0.0.0 --port 8081 --appdir /app_data
     ports:
       - 8081:8081
     volumes:
-      - ./app_data:/app_data
+      - ./autogen/app_data:/app_data
 
   autogenstudio-server:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: autogen
     command: serve --host 0.0.0.0 --port 8082 --docs --workflow /workflows/<workflow_example>.json
     env_file:
-      - ./app_data/.env
+      - ./autogen/app_data/.env
     ports:
       - 8082:8082
     volumes:
-      - ./workflows:/workflows
+      - ./autogen/workflows:/workflows
+
+  tutorial-ui:
+    build:
+      context: workshop
+    ports:
+      - 9090:9090

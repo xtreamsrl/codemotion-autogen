@@ -1,3 +1,8 @@
+summary: Autogen, Assemble! - Codemotion Conference Milan 2024
+id: autogen-assemble
+status: Published 
+authors: xtream
+
 ## 👋 Introduction
 
 The aim of this document is to provide a guide to the different iterations we will go through using **Autogen Studio**.
@@ -270,5 +275,5 @@ Follow these steps:
    ```
    AutoGen is now exposing a REST API on `http://localhost:8082`. The API offers a `GET /predict/{input}` endpoint to which
    we can send messages and get responses.
-4. Update the [api](../src/pages/api/linkedin-post.ts) file in the app to point to the new server;
+4. Update the [api](../linkedin-post-generator/src/pages/api/linkedin-post.ts) file in the app to point to the new server;
 5. Run the app and enjoy!
