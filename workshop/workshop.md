@@ -269,11 +269,12 @@ Follow these steps:
 
 1. Export the workflow from Studio, downloading it as a file;
 2. Put the downloaded file in the `workflows` folder of `../autogen`;
-3. Run the AutoGen Server:
+3. Update the docker-compose service autogenstudio-server command with the correct workflow file name `--workflow /workflows/<workflow_example>.json`
+4. Run the AutoGen Server:
    ```bash
-   docker-compose -f ../autogen/docker-compose.yml up -d autogenstudio-server
+   docker-compose up -d autogenstudio-server
    ```
-   AutoGen is now exposing a REST API on `http://localhost:8082`. The API offers a `GET /predict/{input}` endpoint to which
+   AutoGen is now exposing a REST API on `http://localhost:8082`. You can check the API swagger at `http://localhost:8082/docs`. The API offers a `GET /predict/{input}` endpoint to which
    we can send messages and get responses.
-4. Update the [api](../linkedin-post-generator/src/pages/api/linkedin-post.ts) file in the app to point to the new server;
-5. Run the app and enjoy!
+5. Update the [api](../linkedin-post-generator/src/pages/api/linkedin-post.ts) file in the app to point to the new server;
+6. Build the app with `npm run web-app:build` and restart the linkedin-app container.

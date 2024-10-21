@@ -15,11 +15,11 @@ To get started with the workshop, follow these steps:
     ```
 3. Start docker services:
     ```bash
-    docker compose up -d --build tutorial-ui autogenstudio-ui
+    docker compose up -d --build tutorial-ui autogenstudio-ui linkedin-app
     ```
 4. In the meanwhile, start the LinkedIn post generator app:
    ```bash
-   npm run start
+   npm run web-app:dev
    ```
 
 ## Links
