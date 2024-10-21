@@ -16,13 +16,13 @@ reproduce or if you fall behind.
 
 ## Let's have a look at the app
 
-Go to [http://localhost:3000](http://localhost:3000) to see the app in action. The app is a LinkedIn post generator that
+Go to [the app](http://localhost:3001) to see the app in action. The app is a LinkedIn post generator that
 uses the gpt-4o model to generate posts based on a given prompt. The app is simple and straightforward, but we can
 enhance it by using Autogen Studio.
 
-## Let's run AutoGen Studio
+## Let's go through AutoGen Studio
 
-Go to [http://localhost:8081](http://localhost:8081) and see the AutoGen Studio interface. This is where we will
+Go to [AutoGen Studio](http://localhost:8081) and see its user interface. This is where we will
 configure our agents and workflows to enhance the app.
 
 > Notice how we already set up models for convenience, using the API in the `.env` file. You can always add new ones.
