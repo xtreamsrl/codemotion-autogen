@@ -8,6 +8,10 @@ authors: xtream
 The aim of this document is to provide a guide to the different iterations we will go through using **Autogen Studio**.
 Attendees to the live workshop can use this file to follow along with the presentation.
 
+The workshop is divided into several checkpoints, each representing a significant step in our journey. The final stage
+of each checkpoint is available in a dedicated branch, which you can check out if you want to skip the steps to
+reproduce or if you fall behind.
+
 > This document also routes to different assets like system prompts and configuration that will be used.
 
 ## Let's have a look at the app

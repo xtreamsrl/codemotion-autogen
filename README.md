@@ -4,6 +4,18 @@ Welcome to the workshop "Agents, Assemble!" held at the Codemotion Conference in
 to guide you through the process of enhancing your digital product by leveraging the full potential of agentic
 application and using AutoGen Studio to do it in a simple way.
 
+## Codebase Overview
+
+The codebase for this workshop is structured to facilitate a step-by-step exploration of GenAI capabilities. It starts
+with a simple example application that uses OpenAI's gpt-4o model via a single-prompt API. From there, we will
+progressively enhance our product using AutoGen and AutoGen Studio.
+
+The codebase is divided into the following parts:
+- [linkedin-post-generator](./linkedin-post-generator) folder contains the sample app source code
+- [workshop](./workshop) folder contains walkthrough and assets for the workshop
+- [autogen](./autogen) folder contains AutoGen configuration files and local sqlite database
+
+
 ## Setup
 
 To get started with the workshop, follow these steps:
@@ -31,22 +43,6 @@ After every service is up and running, you can access the following services:
 - [AutoGen Studio](http://localhost:8081)
 - [LinkedIn Post Generator](http://localhost:3000)
 
-## Codebase Overview
-
-The codebase for this workshop is structured to facilitate a step-by-step exploration of GenAI capabilities. It starts
-with a simple example application that uses OpenAI's gpt-4o model via a single-prompt API. From there, we will
-progressively enhance our product using AutoGen and AutoGen Studio.
-
-The codebase is divided into the following parts:
-- [linkedin-post-generator](./linkedin-post-generator) folder contains the sample app source code
-- [workshop](./workshop) folder contains walkthrough and assets for the workshop
-- [autogen](./autogen) folder contains AutoGen configuration files and local sqlite database
-
-## Workshop Checkpoints
-
-The workshop is divided into several checkpoints, each representing a significant step in our journey. The final stage
-of each checkpoint is available in a dedicated branch, which you can check out if you want to skip the steps to
-reproduce or if you fall behind.
 
 ## Let's get started!
 Open the Tutorial UI and follow from there. Have fun! 🚀
