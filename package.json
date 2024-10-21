@@ -6,5 +6,8 @@
     "setup": "npm --prefix linkedin-post-generator install && npm --prefix linkedin-post-generator run build && cp .env ./linkedin-post-generator/.env.local && cp .env ./autogen/app_data/.env",
     "web-app:dev": "npm --prefix linkedin-post-generator run dev",
     "web-app:build": "npm --prefix linkedin-post-generator run build"
+  },
+  "engines": {
+    "node": ">=18.7.0"
   }
 }
