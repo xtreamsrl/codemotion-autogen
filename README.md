@@ -1,49 +1,52 @@
 # Agents, Assemble! - Codemotion Conference Milan 2024
 
 Welcome to the workshop "Agents, Assemble!" held at the Codemotion Conference in Milan, 2024. This workshop is designed
-to guide you through the process of enhancing your digital product by leveraging the full potential of Generative AI (
-GenAI).
+to guide you through the process of enhancing your digital product by leveraging the full potential of agentic
+application and using AutoGen Studio to do it in a simple way.
 
 ## Setup
 
 To get started with the workshop, follow these steps:
- 
-1. First of all, copy the API keys we provided you into the [.env](.env) file.
+
+1. First of all, copy the API keys we provided you into the [.env](.env) file. Make sure the file is named ´.env´ and is
+   located in the root of the repository.
 2. Run the following command in the repository root to install dependencies and set up the environment:
     ```bash
     npm run setup
     ```
-3. Start docker services:
+3. Start docker services (will take a while):
     ```bash
     docker compose up -d --build tutorial-ui autogenstudio-ui linkedin-app
     ```
-4. In the meanwhile, start the LinkedIn post generator app:
+4. In the meanwhile, start the LinkedIn post generator app **in a new terminal**:
    ```bash
    npm run web-app:dev
    ```
 
 ## Links
+
+After every service is up and running, you can access the following services:
+
 - [Tutorial UI](http://localhost:9090)
 - [AutoGen Studio](http://localhost:8081)
+- [LinkedIn Post Generator](http://localhost:3000)
 
 ## Codebase Overview
 
 The codebase for this workshop is structured to facilitate a step-by-step exploration of GenAI capabilities. It starts
-with a simple example application that uses OpenAI's gpt-4o or o1 model via a single-prompt API. From there, we will
+with a simple example application that uses OpenAI's gpt-4o model via a single-prompt API. From there, we will
 progressively enhance our product using AutoGen and AutoGen Studio.
+
+The codebase is divided into the following parts:
+- [linkedin-post-generator](./linkedin-post-generator) folder contains the sample app source code
+- [workshop](./workshop) folder contains walkthrough and assets for the workshop
+- [autogen](./autogen) folder contains AutoGen configuration files and local sqlite database
 
 ## Workshop Checkpoints
 
-The workshop is divided into several checkpoints, each representing a significant step in our journey:
+The workshop is divided into several checkpoints, each representing a significant step in our journey. The final stage
+of each checkpoint is available in a dedicated branch, which you can check out if you want to skip the steps to
+reproduce or if you fall behind.
 
-1. `one-shot-prompt`: This is the starting point, where we use a single-prompt API to generate content.
-
-2. `autogenstudio - v1, v2, v3 + fallback workflows`: In these steps, we will use AutoGen Studio to prototype more
-   sophisticated generation flows. We will introduce specialized LLM agents that collaborate to produce deeper and more
-   precise results.
-
-3. `autogen serve v3 + app`: Finally, we will integrate our advanced generation flows into our application, keeping them
-   decoupled from the rest of the codebase.
-
-By the end of this workshop, you will have a clear understanding of the benefits of using a multi-agent paradigm in
-GenAI, along with practical tools to experiment with it in your own products. Enjoy the journey!
+## Let's get started!
+Open the Tutorial UI and follow from there. Have fun! 🚀

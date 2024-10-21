@@ -1,6 +1,6 @@
 summary: Autogen, Assemble! - Codemotion Conference Milan 2024
 id: autogen-assemble
-status: Published 
+status: Published
 authors: xtream
 
 ## 👋 Introduction
@@ -10,41 +10,25 @@ Attendees to the live workshop can use this file to follow along with the presen
 
 > This document also routes to different assets like system prompts and configuration that will be used.
 
+## Let's have a look at the app
+
+Go to [http://localhost:3000](http://localhost:3000) to see the app in action. The app is a LinkedIn post generator that
+uses the gpt-4o model to generate posts based on a given prompt. The app is simple and straightforward, but we can
+enhance it by using Autogen Studio.
+
 ## Let's run AutoGen Studio
 
-To run AutoGen Studio, you need to follow these steps:
+Go to [http://localhost:8081](http://localhost:8081) and see the AutoGen Studio interface. This is where we will
+configure our agents and workflows to enhance the app.
 
-Build the Docker image:
-
-```bash
-docker build -t autogenstudio ../autogen
-```
-
-Run the AutoGen Studio UI:
-
-```bash
-docker-compose -f ../autogen/docker-compose.yml up -d autogenstudio-ui 
-```
-
-Now Studio is served on `http://localhost:8081`.
-
-## Clean samples and configure models
-
-AutoGen Studio comes with a few samples preloaded. Let's clean everything up and start fresh:
-
-1. Delete all skills, agents, models, and workflows;
-2. Create two models: `gpt-4o` and `claude-3.5-sonnet`, via UI;
-3. Use the given api keys and test the model to check everything is working.
-
-🚀 We'll later be able to use those models for our very own AI agents.
+> Notice how we already set up models for convenience, using the API in the `.env` file. You can always add new ones.
 
 ## Recreating the one-shot prompt case in Studio
 
 We will start by reproducing the one-shot prompt generation of the sample app using Autogen Studio. To do this, we will
-configure a
-**sequential workflow** that includes only one copywriter agent, whose task is to generate text in response to our
-requests. This simple workflow allows us to exactly replicate the behavior of the sample app and serves as a starting
-point.
+configure a **sequential workflow** that includes only one copywriter agent, whose task is to generate text in response
+to our requests. This simple workflow allows us to exactly replicate the behavior of the sample app and serves as a
+starting point.
 
 ![img.png](assets/images/img.png)
 
@@ -65,6 +49,13 @@ output at the end of a workflow. Examples of built-in summary methods are:
 > Beware that the summarization describes the conversation, so it might be hard to use for a precise output
 
 ### ⚙️ Let's configure it!
+
+> **Checkpoint ⭐**: checkout branch `checkpoints/checkpoint-1` to skip the next steps and get the system pre-configured.
+> Reload the AutoGen Studio
+> container with this command:
+> ```bash
+> docker-compose restart autogenstudio-ui
+> ```
 
 To create this simple workflow in Studio, follow these steps:
 
@@ -108,11 +99,16 @@ It can do so autonomously using an LLM, going in Round Robin or Random order. Wh
 distributes it to all other agents via broadcasting so that everyone is on the same page.
 
 > The group chat manager does not instruct the agents directly, it just decides who's next and hands them the speaker
-> spot to
-> continue on the task, but never says a word in the shared conversation. Some developers would say this is the best
-> type of management.
+> spot to continue on the task, but never says a word in the shared conversation. Some developers would say this is the
+> best type of management.
 
 ### ⚙️ Let's configure it!
+
+> **Checkpoint ⭐**: checkout branch `checkpoints/checkpoint-2` to skip the next steps and get the system pre-configured.
+> Reload the AutoGen Studio container with this command:
+> ```bash
+> docker-compose restart autogenstudio-ui
+> ```
 
 To configure the workflow with a critic in Studio, follow these steps:
 
@@ -124,10 +120,10 @@ To configure the workflow with a critic in Studio, follow these steps:
 
 2. **Create a `group_chat` type agent**:
     - Add the two agents (copywriter and critic);
-    - Set the temperature to 0 to ensure consistency in the management;
+    - Pick a LLM for the group chat manager, and set its temperature to 0;
     - Next speaker can be round-robin - we want them to discuss and converging over a final draft;
     - Prevent agents to speak twice in a row.
-    - Max the number of rounds to 5.
+    - Max the number of rounds to 10.
 
 3. **Update copywriter system prompt**
     - Set the copywriter system prompt to [copywriter.v2](assets/prompts/copywriter.v2.txt) in the asset folder - but
@@ -154,6 +150,12 @@ publish" the copy once it's ready. For our use case, publishing means:
 
 ### ⚙️ Let's configure it!
 
+> **Checkpoint ⭐**: checkout branch `checkpoints/checkpoint-3` to skip the next steps and get the system pre-configured.
+> Reload the AutoGen Studio container with this command:
+> ```bash
+> docker-compose restart autogenstudio-ui
+> ```
+
 To update the workflow in Studio, follow these steps:
 
 1. **Create a new publisher assistant agent**:
@@ -165,15 +167,14 @@ To update the workflow in Studio, follow these steps:
 2. **Update the Group Chat**:
     - Add the publisher to the existing group chat;
     - Set the next speaker selection to **auto** to allow a self-managed flow between agents;
-    - Pick a LLM for the group chat manager, and set its temperature to 0;
-    - Increase the maximum number of rounds in the conversation to 10;
 
 3. **Improve agent descriptions**:
 
    Provide more detailed descriptions for each agent so that the grouo chat manager can better understand their role,
    and be more precise in deciding who's next to speak:
+
    | Agent | Description |
-   | ------------ | -------------------------------------------------------------------------------- |
+            | ------------ | -------------------------------------------------------------------------------- |
    | copywriter | writes the actual content drafts, once the topics are understood |
    | style_critic | challenges copy drafts about their style |
    | publisher | talks after every critic say it's ok on their side, stays silent until then |
@@ -214,6 +215,12 @@ responsibilities well decoupled and get a more stable group chat, we opted for a
 
 ### ⚙️ Let's configure it!
 
+> **Checkpoint ⭐**: checkout branch `checkpoints/checkpoint-4` to skip the next steps and get the system pre-configured.
+> Reload the AutoGen Studio container with this command:
+> ```bash
+> docker-compose restart autogenstudio-ui
+> ```
+
 To configure this workflow:
 
 1. **Create a new content critic assistant agent**:
@@ -245,6 +252,7 @@ To configure this workflow:
 
 6. **Improve agent descriptions**:
    Again, let's revise descriptions to help out the group chat manager figuring out who's best to speak next:
+
    | Agent | Description |
    | ------------ | -------------------------------------------------------------------------------- |
    | copywriter | writes the actual content drafts, once the topics are understood |
@@ -265,16 +273,35 @@ AutoGen Studio allows to export the workflow as a JSON file. This workflow can t
 provides an HTTP API to interact with the workflow. The API can be used to start a new session, send messages to the
 workflow, and retrieve the conversation history.
 
-Follow these steps:
+### ⚙️ Let's configure it!
+
+> **Checkpoint ⭐**: checkout branch `checkpoints/checkpoint-5` to skip the next steps and get the system pre-configured.
 
 1. Export the workflow from Studio, downloading it as a file;
 2. Put the downloaded file in the `workflows` folder of `../autogen`;
-3. Update the docker-compose service autogenstudio-server command with the correct workflow file name `--workflow /workflows/<workflow_example>.json`
+3. Update the docker-compose service autogenstudio-server command with the correct workflow file
+   name `--workflow /workflows/<workflow_example>.json`
 4. Run the AutoGen Server:
    ```bash
    docker-compose up -d autogenstudio-server
    ```
-   AutoGen is now exposing a REST API on `http://localhost:8082`. You can check the API swagger at `http://localhost:8082/docs`. The API offers a `GET /predict/{input}` endpoint to which
+   AutoGen is now exposing a REST API on `http://localhost:8082`. You can check the API swagger
+   at `http://localhost:8082/docs`. The API offers a `GET /predict/{input}` endpoint to which
    we can send messages and get responses.
-5. Update the [api](../linkedin-post-generator/src/pages/api/linkedin-post.ts) file in the app to point to the new server;
-6. Build the app with `npm run web-app:build` and restart the linkedin-app container.
+5. Update the [api](../linkedin-post-generator/src/pages/api/linkedin-post.ts) file in the app to point to the new
+   server;
+
+### Let's test it!
+> These steps are mandatory even if you skipped the previous ones and checked out the `checkpoint-5` branch.
+1. Start the AutoGen Server (if not running already)
+    ```bash
+    docker-compose up -d autogenstudio-server
+    ```
+2. Rebuild the app
+    ```bash
+    npm run web-app:build
+    ```
+3. Restart the app container
+    ```bash
+    docker-compose restart linkedin-app
+    ```
