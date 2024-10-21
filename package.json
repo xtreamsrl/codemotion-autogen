@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Welcome to the workshop \"Agents, Assemble!\" held at the Codemotion Conference in Milan, 2024. This workshop is designed to guide you through the process of enhancing your digital product by leveraging the full potential of Generative AI ( GenAI).",
   "scripts": {
-    "setup": "npm --prefix linkedin-post-generator install && cp .env ./linkedin-post-generator/.env.local && cp .env ./autogen/app_data/.env"
+    "setup": "npm --prefix linkedin-post-generator install && cp .env ./linkedin-post-generator/.env.local && cp .env ./autogen/app_data/.env",
+    "web-app": "npm --prefix linkedin-post-generator run dev"
   }
 }
