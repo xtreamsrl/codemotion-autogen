@@ -30,10 +30,6 @@ To get started with the workshop, follow these steps:
     ```bash
     docker compose up -d --build tutorial-ui autogenstudio-ui linkedin-app
     ```
-4. In the meanwhile, start the LinkedIn post generator app **in a new terminal**:
-   ```bash
-   npm run web-app:dev
-   ```
 
 ## Links
 
