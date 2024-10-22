@@ -13,7 +13,7 @@ export default async function handler(
         const {topic} = req.body;
         const response = await fetch(`http://autogenstudio-server:8082/predict/${topic}`)
         const content = await response.json()
-        res.status(200).json({content: content.data.meta.messages.at(-2).message.content});
+        res.status(200).json({content: content.data.meta.messages.at(-1).message.content.replaceAll('TERMINATE', '')});
     } else {
         res.status(405).json({content: 'Method Not Allowed'});
     }
