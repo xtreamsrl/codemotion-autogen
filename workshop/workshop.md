@@ -63,13 +63,12 @@ output at the end of a workflow. Examples of built-in summary methods are:
 
 To create this simple workflow in Studio, follow these steps:
 
-1. **Create a user proxy agent**:
-2. **Create a copywriter assistant agent**:
+1. **Create a copywriter assistant agent**:
     - Set the temperature to 0.5 as in the sample app - we want a fairly creative copywriter;
     - Connect one of the existing models, already loaded during setup;
     - Set its system prompt to [copywriter.v1](assets/prompts/copywriter.v1.txt) in the asset folder - but feel free to
       inspect and edit.
-3. **Create a sequential workflow**:
+2. **Create a sequential workflow**:
     - Add the copywriter as the only step;
     - Set the summarization to `last`;
 
@@ -116,25 +115,28 @@ distributes it to all other agents via broadcasting so that everyone is on the s
 
 To configure the workflow with a critic in Studio, follow these steps:
 
-1. **Create the new style critic assistant agent**:
+1. **Create a user proxy agent**
+    - Leave all parameters to default. 
+
+2. **Create the new style critic assistant agent**:
     - Assign a different model than the `copywriter` to ensure a diversity of feedback;
     - Set the temperature to 0 to grant the feedbacks consistency;
     - Set its system prompt to [style-critic](assets/prompts/style-critic.txt) in the asset folder - but feel free to
       inspect and edit.
 
-2. **Create a `group_chat` type agent**:
+3. **Create a `group_chat` type agent**:
     - Add the two agents (copywriter and critic);
     - Pick a LLM for the group chat manager, and set its temperature to 0;
     - Next speaker can be round-robin - we want them to discuss and converging over a final draft;
     - Prevent agents to speak twice in a row.
     - Max the number of rounds to 10.
 
-3. **Update copywriter system prompt**
+4. **Update copywriter system prompt**
     - Set the copywriter system prompt to [copywriter.v2](assets/prompts/copywriter.v2.txt) in the asset folder - but
       feel free to inspect and edit.
 
-4. **Create an autonomous workflow**:
-    - Set the user_proxy as initiator and the group as receiver;
+5. **Create an autonomous workflow**:
+    - Set the user proxy as initiator and the group as receiver;
     - Let's keep the summarization as `last`.
 
 👉 By running this workflow, we can observe how the critic's intervention improves the quality of the generated text,
