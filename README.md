@@ -37,7 +37,7 @@ After every service is up and running, you can access the following services:
 
 - [Tutorial UI](http://localhost:9090)
 - [AutoGen Studio](http://localhost:8081)
-- [LinkedIn Post Generator](http://localhost:3000)
+- [LinkedIn Post Generator](http://localhost:3001)
 
 
 ## Let's get started!
