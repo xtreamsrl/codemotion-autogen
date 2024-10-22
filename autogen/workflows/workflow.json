@@ -1,8 +1,8 @@
 {
+  "version": "0.0.1",
   "description": "",
   "summary_method": "last",
   "user_id": "guestuser@gmail.com",
-  "version": "0.0.1",
   "name": "Chat Workflow",
   "type": "autonomous",
   "sample_tasks": [],
@@ -28,10 +28,10 @@
         "agents": []
       },
       "link": {
-        "sequence_id": 0,
         "agent_id": 15,
         "workflow_id": 9,
-        "agent_type": "sender"
+        "agent_type": "sender",
+        "sequence_id": 0
       }
     },
     {
@@ -211,7 +211,7 @@
             "type": "assistant",
             "config": {
               "name": "content_critic",
-              "description": "challenges copy drafts about the things they contain",
+              "description": "challenges copy drafts about the things they contain (which is more important than style)",
               "llm_config": {
                 "config_list": [
                   {
@@ -343,10 +343,10 @@
         ]
       },
       "link": {
-        "sequence_id": 0,
         "agent_id": 17,
         "workflow_id": 9,
-        "agent_type": "receiver"
+        "agent_type": "receiver",
+        "sequence_id": 0
       }
     }
   ]
