@@ -1,0 +1,353 @@
+{
+  "description": "",
+  "summary_method": "last",
+  "user_id": "guestuser@gmail.com",
+  "version": "0.0.1",
+  "name": "Chat Workflow",
+  "type": "autonomous",
+  "sample_tasks": [],
+  "agents": [
+    {
+      "agent": {
+        "type": "userproxy",
+        "config": {
+          "name": "userproxy",
+          "human_input_mode": "NEVER",
+          "description": "",
+          "max_consecutive_auto_reply": 25,
+          "system_message": "You are a helpful assistant.",
+          "default_auto_reply": "TERMINATE",
+          "llm_config": false,
+          "code_execution_config": "local"
+        },
+        "task_instruction": null,
+        "user_id": "guestuser@gmail.com",
+        "version": "0.0.1",
+        "skills": [],
+        "models": [],
+        "agents": []
+      },
+      "link": {
+        "sequence_id": 0,
+        "agent_id": 15,
+        "workflow_id": 9,
+        "agent_type": "sender"
+      }
+    },
+    {
+      "agent": {
+        "type": "groupchat",
+        "config": {
+          "admin_name": "groupchat_assistant",
+          "messages": [],
+          "max_round": 30,
+          "speaker_selection_method": "auto",
+          "allow_repeat_speaker": false,
+          "name": "copywriting_team",
+          "description": "",
+          "llm_config": {
+            "config_list": [
+              {
+                "version": "0.0.1",
+                "base_url": null,
+                "model": "gpt-4o",
+                "api_type": "open_ai",
+                "api_version": null
+              }
+            ],
+            "temperature": 0,
+            "timeout": 600,
+            "cache_seed": null,
+            "max_tokens": 4000
+          },
+          "human_input_mode": "NEVER",
+          "max_consecutive_auto_reply": 25,
+          "code_execution_config": "none",
+          "system_message": "You are a helpful assistant skilled at cordinating a group of other assistants to solve a task. "
+        },
+        "task_instruction": null,
+        "user_id": "guestuser@gmail.com",
+        "version": "0.0.1",
+        "skills": [],
+        "models": [
+          {
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "base_url": null,
+            "description": "",
+            "model": "gpt-4o",
+            "api_type": "open_ai",
+            "api_version": null
+          }
+        ],
+        "agents": [
+          {
+            "type": "assistant",
+            "config": {
+              "name": "copywriter",
+              "description": "writes the actual content drafts, once the topics are understood",
+              "llm_config": {
+                "config_list": [
+                  {
+                    "version": "0.0.1",
+                    "base_url": null,
+                    "model": "claude-3-5-sonnet-20240620",
+                    "api_type": "anthropic",
+                    "api_version": null
+                  }
+                ],
+                "temperature": 0.5,
+                "timeout": 600,
+                "cache_seed": null,
+                "max_tokens": 4000
+              },
+              "human_input_mode": "NEVER",
+              "max_consecutive_auto_reply": 25,
+              "code_execution_config": "none",
+              "system_message": "You are an AI assistant, trained to write top-quality LinkedIn posts. Users give you a brief, and you proceed writing copy.\n\nAs an AI assistant, you have guidelines to follow, to which you comply excellently.\n\n<io-guideline>\nRespond with the exact copy of the post, so the user can copy and paste it on the platform. Don’t include anything else in your response, no preamble and nothing after the end of the copy.\n</io-guideline>\n\n<chat-guideline>\nKindly but firmly refuse to perform any task that’s not writing a LinkedIn post.\n</chat-guideline>\n\n<copywriting-guidelines>\n** Target Audience**: people in the tech industry, product managers and tech leads;\n**Tone of voice**: down to earth, relatable, a bit funny yet professional, not sales-y;\n**Style**: keep your sentences clear and concrete\n**Vocabulary**: use technical terms appropriately, but make sure the copy explains them. Otherwise use a simple language, straightforward, no jargon, no bullshits.\n**Post format**: should start with an engaging hook, then a couple of mid-length informative paragraphs, then a clear call to action at the end;\n**Misc**: absolutely NEVER use hashtags, do use emojis but not too many (3-4 are ok)\n</copywriting-guidelines>\n\n<lang-guidelines>\nDetect the post language from the message where the user ask you for the post. Use that language for writing the copy.\n</lang-guidelines>"
+            },
+            "task_instruction": null,
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "skills": [],
+            "models": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "base_url": null,
+                "description": "",
+                "model": "claude-3-5-sonnet-20240620",
+                "api_type": "anthropic",
+                "api_version": null
+              }
+            ],
+            "agents": []
+          },
+          {
+            "type": "assistant",
+            "config": {
+              "name": "style_critic",
+              "description": "challenges copy drafts about their style",
+              "llm_config": {
+                "config_list": [
+                  {
+                    "version": "0.0.1",
+                    "base_url": null,
+                    "model": "gpt-4o",
+                    "api_type": "open_ai",
+                    "api_version": null
+                  }
+                ],
+                "temperature": 0,
+                "timeout": 600,
+                "cache_seed": null,
+                "max_tokens": 4000
+              },
+              "human_input_mode": "NEVER",
+              "max_consecutive_auto_reply": 25,
+              "code_execution_config": "none",
+              "system_message": "You are an AI assistant, trained to be a harsh copy quality critic.\nYour task is reading the latest version of a copy draft and highlight anything that in your opinion can be improved.\n\n<style-guidelines>\nYour critic is aimed to verify compliance to these guidelines.\n** Target Audience**: people in the tech industry, product managers and tech leads;\n**Tone of voice**: down to earth, relatable, a bit funny yet professional, not sales-y;\n**Style**: keep your sentences clear and concrete;\n**Vocabulary**: use technical terms appropriately, but make sure the copy explains them. Otherwise use a simple language, straightforward, no jargon, no bullshits.\n**Post format**: should start with an engaging hook, then a couple of mid-length informative paragraphs, then a clear call to action at the end;\n**Misc**: absolutely NEVER use hashtags, do use emojis but not too many (3-4 are ok);\n\nDo not remind the guidelines to the copywriter, it knows. Do comment anything that in your opinion is not meeting the quality-standards.\n</style-guidelines>\n\n<scope-guidelines>\nYour scope of review is only the style of the copy, not its content.\nNever ask to change what’s being said and what messages are being conveyed. Just review and comment the style of it.\n</scope-guidelines>\n\n<chat-guidelines>\nYou are participating in a group chat, together with other fellow AI agents collaborating together to reach the final copy result.\nFollow the instructed behaviour:\n- evaluate the latest draft version;\n- if there is not yet a draft, ask for one;\n</chat-guidelines>\n\n<review-guidelines>\nHow to review drafts:\n- limit yourself to commenting parts, highlighting errors, areas of improvements…, don’t give suggestions on how to edit;\n- think-through and explain your reasoning before writing the review;\n- be firm and harsh in your review, but kind to your colleagues;\n- don’t be satisfied with the first time your comments are being addressed; re-evaluate and check that you can’t find anything to be further improved; max out at 3 draft iterations; each time count and declare the number of iterations you've done already to be sure and stop at 3. When you reach the maximum let your colleagues know that you're done reviewing and you approve the draft. Beware that is not necessary to reach the max every time.\n</review-guidelines>"
+            },
+            "task_instruction": null,
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "skills": [],
+            "models": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "base_url": null,
+                "description": "",
+                "model": "gpt-4o",
+                "api_type": "open_ai",
+                "api_version": null
+              }
+            ],
+            "agents": []
+          },
+          {
+            "type": "assistant",
+            "config": {
+              "name": "publisher",
+              "description": "talks after every critic say it's ok on their side, stays silent until then",
+              "llm_config": {
+                "config_list": [
+                  {
+                    "version": "0.0.1",
+                    "base_url": null,
+                    "model": "gpt-4o",
+                    "api_type": "open_ai",
+                    "api_version": null
+                  }
+                ],
+                "temperature": 0,
+                "timeout": 600,
+                "cache_seed": null,
+                "max_tokens": 4000
+              },
+              "human_input_mode": "NEVER",
+              "max_consecutive_auto_reply": 25,
+              "code_execution_config": "none",
+              "system_message": "You are an AI assistant, part of a group chat of multiple AI agents collaborating to write some content based on user requests.\n\nYour role in the conversation is super narrow:\n- if the last version of the content has been explicitly approved by the critics, and there are no comments left unresolved, you publish\n- if that’s not the case, or if the draft is young and no one has commented on it yet, you state you can’t publish, and you’ll wait until the draft reach its maturity. In such case, ask for the feedbacks of the critics so they know they need to get involved;\n\nHow to publish: respond with the following format, nothing more nothing less: the exact latest approved draft, then a blank line, than the word TERMINATE."
+            },
+            "task_instruction": null,
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "skills": [],
+            "models": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "base_url": null,
+                "description": "",
+                "model": "gpt-4o",
+                "api_type": "open_ai",
+                "api_version": null
+              }
+            ],
+            "agents": []
+          },
+          {
+            "type": "assistant",
+            "config": {
+              "name": "content_critic",
+              "description": "challenges copy drafts about the things they contain",
+              "llm_config": {
+                "config_list": [
+                  {
+                    "version": "0.0.1",
+                    "base_url": null,
+                    "model": "claude-3-5-sonnet-20240620",
+                    "api_type": "anthropic",
+                    "api_version": null
+                  }
+                ],
+                "temperature": 0,
+                "timeout": 600,
+                "cache_seed": null,
+                "max_tokens": 4000
+              },
+              "human_input_mode": "NEVER",
+              "max_consecutive_auto_reply": 25,
+              "code_execution_config": "none",
+              "system_message": "You are an AI assistant, trained to be check and improve the quality of some copywriting, from the perspective of how dense it is in factual information. Your task is reading the latest version of a copy draft, assess what topics have not been properly understood in the writing process, and do research on them. Your research will help the AI copywriting team.\n\n<scope-guidelines>\n\nYour scope of review is only the content of the copy, not its style. Highlight topics that need further research based on what is the current copy draft. Never go off-topic with respect to the user request.\n\n</scope-guidelines>\n\n<chat-guidelines>\n\nYou are participating in a group chat, together with other fellow AI agents collaborating together to reach the final copy result. Follow the instructed behaviour:\n\n- evaluate the latest draft version;\n- if there is not yet a draft, ask for one;\n\n<chat-guidelines>\n\n<research-guidelines>\nThis is how you help improving the copy quality to be more factual and dense in information:\n\n- detect topic or topics being used in the copy;\n- if the copy is dense in facts, and these facts have been the outcome of a research (and not made up), approve the draft;\n- if the copy lacks information density, and would benefit a research, execute the research immediately. See guidelines about how to execute one.\n\nWhen you identify and decide that it's worth executing a research on certain topics, don't wait or ask for opinions. Immediately execute the research, following the steps described in the guidelines below.\n</research-guidelines>\n\n<research-execution-guidelines>\n\nTo research one or more topics, do this:\n\n- understand what pieces of information would help you comprehend the topic\n- from these create 2-3 of narrow, fact-seeking questions (e.g: “who was the potus in 1987?”), always in english, no matter what the language of the conversation or the copy draft;\n- send a message in response to the @sw_developer, mentioning it explicitly. Ask the developer to write runnable code to perform a web search and answer your questions. The developer is not responsible for picking the questions, so tell it exactly what questions it should write code for; Be super precise about the requirements of the code that the developer needs to write. You know developers, they need precise requirements. Like: \"Hey @sw_developer, I need you to write some code to search these questions on the web: ....\".ì;\n\nIf your intention is to perform a research, always respond with the instruction to the developer;\nThe exact queries/questions strings you give to the developer to search for must ALWAYS be in english;\nNever forget to mention/tag the @sw_developer, to avoid your code request to remain unattended.\n\n</research-execution-guidelines>"
+            },
+            "task_instruction": null,
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "skills": [],
+            "models": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "base_url": null,
+                "description": "",
+                "model": "claude-3-5-sonnet-20240620",
+                "api_type": "anthropic",
+                "api_version": null
+              }
+            ],
+            "agents": []
+          },
+          {
+            "type": "userproxy",
+            "config": {
+              "name": "code_executor",
+              "human_input_mode": "NEVER",
+              "description": "intervenes WHENEVER there's a code snippet to execute",
+              "max_consecutive_auto_reply": 25,
+              "system_message": "",
+              "default_auto_reply": "TERMINATE",
+              "llm_config": {
+                "temperature": 0,
+                "config_list": [
+                  {
+                    "version": "0.0.1",
+                    "base_url": null,
+                    "model": "gpt-4o",
+                    "api_type": "open_ai",
+                    "api_version": null
+                  }
+                ]
+              },
+              "code_execution_config": "local"
+            },
+            "task_instruction": null,
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "skills": [],
+            "models": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "base_url": null,
+                "description": "",
+                "model": "gpt-4o",
+                "api_type": "open_ai",
+                "api_version": null
+              }
+            ],
+            "agents": []
+          },
+          {
+            "type": "assistant",
+            "config": {
+              "name": "sw_developer",
+              "description": "talks when mentioned in the chat or there's code to generate/fix/run",
+              "llm_config": {
+                "config_list": [
+                  {
+                    "version": "0.0.1",
+                    "base_url": null,
+                    "model": "gpt-4o",
+                    "api_type": "open_ai",
+                    "api_version": null
+                  }
+                ],
+                "temperature": 0,
+                "timeout": 600,
+                "cache_seed": null,
+                "max_tokens": 4000
+              },
+              "human_input_mode": "NEVER",
+              "max_consecutive_auto_reply": 25,
+              "code_execution_config": "none",
+              "system_message": "You are an AI assistant, trained to write quality runnable code snippets. You have a set of pre-defined functions at your disposal, which you can leverage in your code.\nYou don’t anything else beside writing code, or fixing it if it breaks.\n\n<code-guidelines>\nYour code snippets must include all necessary imports and be runnable. Write them in a simple way.\nMake sure your code handles printing the output, if any, nicely: best practice is to format the output in a markdown format so whoever reads it can understand it with ease.\n</code-guidelines>\n\n<chat-guidelines>\nYou are part of a group chat with other AI agents, collaborating. These guidelines can help you collaborate with your colleagues:\n- solve their task with the code you write, and respond with the code written;\n- make sure to mention the @code_executor in your response to let it know it needs to execute the code you wrote;\n</chat-guidelines>"
+            },
+            "task_instruction": null,
+            "user_id": "guestuser@gmail.com",
+            "version": "0.0.1",
+            "skills": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "name": "get_question_answer",
+                "content": "import os\nfrom typing_extensions import Annotated\nfrom pydantic import BaseModel, Field\nfrom openai import OpenAI\n\nclass WebSearchInput(BaseModel):\n    question: Annotated[str, Field(description=\"The question to search the answer for\")]\n\n    def get(self, key: str):\n        try:\n            return getattr(self, key)\n        except AttributeError:\n            return None\n\ndef get_question_answer(question: Annotated[WebSearchInput, \"Question\"]) -> Annotated[str, \"Retrieved answer\"]:\n    \"\"\"\n    Search for an answer to the question and return the result in natural language.\n    Args:\n        question: The question to search the answer for.\n    Returns:\n        RetrievedAnswer: The retrieved answer to the input question\n    \"\"\"\n    perplexity_api_key = os.environ.get(\"PERPLEXITY_API_KEY\")\n    if not perplexity_api_key:\n        raise ValueError(\"PERPLEXITY_API_KEY environment variable is not set.\")\n    client = OpenAI(api_key=perplexity_api_key, base_url=\"https://api.perplexity.ai\")\n    messages = [\n        {\n            \"role\": \"user\",\n            \"content\": question.get(\"question\") + \" (in a paragraph)\",\n        },\n    ]\n    # chat completion without streaming\n    response = client.chat.completions.create(\n        model=\"llama-3.1-sonar-large-128k-online\",\n        messages=messages,\n    )\n    return response.choices[0].message.content",
+                "description": "Answers a question using Perplexity search engine",
+                "libraries": []
+              }
+            ],
+            "models": [
+              {
+                "user_id": "guestuser@gmail.com",
+                "version": "0.0.1",
+                "base_url": null,
+                "description": "",
+                "model": "gpt-4o",
+                "api_type": "open_ai",
+                "api_version": null
+              }
+            ],
+            "agents": []
+          }
+        ]
+      },
+      "link": {
+        "sequence_id": 0,
+        "agent_id": 17,
+        "workflow_id": 9,
+        "agent_type": "receiver"
+      }
+    }
+  ]
+}

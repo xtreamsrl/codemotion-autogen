@@ -13,7 +13,7 @@ services:
   autogenstudio-server:
     build:
       context: autogen
-    command: serve --host 0.0.0.0 --port 8082 --docs --workflow /workflows/<workflow_file_name>.json
+    command: serve --host 0.0.0.0 --port 8082 --docs --workflow /workflows/workflow.json
     env_file:
       - ./autogen/app_data/.env
     ports:

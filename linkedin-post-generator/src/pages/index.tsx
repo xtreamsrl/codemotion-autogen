@@ -39,7 +39,7 @@ export default function LinkedInPostGenerator() {
         setIsLoading(true)
         setIsGenerated(false)
         try {
-            const response = await fetch('http://localhost:3001/api/linkedin-post', {
+            const response = await fetch('http://localhost:3001/api/linkedin-post-autogen', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
